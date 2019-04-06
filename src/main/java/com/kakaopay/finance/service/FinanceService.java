@@ -66,14 +66,13 @@ public class FinanceService {
 
     public BankStatistics getFinanceNecessary3(){
 
-//        return new BankStatistics("외환은행",
+        return new BankStatistics("외환은행"
 //                new ArrayList<YearName>(){{
 //                    add(new YearName(2008, 78));
 //                    add(new YearName(2015, 1702));
 //                }}
-//        );
+        );
 
-        return null;
     }
 
 }

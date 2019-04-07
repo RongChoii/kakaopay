@@ -14,6 +14,7 @@ public class FinanceOperation {
     EntityManager entityManager;
 
     public FinanceOperation(){
+        System.out.println("@@@@ FinanceOperation ");
         entityManager = H2LocalConfig.getEntityManagerFactory().createEntityManager();
     }
 
@@ -22,6 +23,7 @@ public class FinanceOperation {
      * @return
      */
     public FinanceOperation begin(){
+        System.out.println("@@@@ begin");
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         return this;
@@ -33,7 +35,7 @@ public class FinanceOperation {
      * @return
      */
     public FinanceOperation insertEntity(List<Map<String, Integer>> param) {
-
+        System.out.println("@@@@ insertEntity");
         param.forEach(map -> {
             entityManager.persist(
                     new FileDto()

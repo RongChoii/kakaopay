@@ -16,8 +16,9 @@ import javax.persistence.Id;
 public class FileDto {
 
     @Id
+    private int seq;
+
     private int year;
-    @Id
     private int month;
     private int molitFd;  // 주택도시기금
     private int kbBank;  // 국민은행

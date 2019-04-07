@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class YearName {
+public class YearAmount {
 
     @Id
     @GeneratedValue

@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplyListMain {
+public class SupplyListTotal {
 
     @Id
     @GeneratedValue

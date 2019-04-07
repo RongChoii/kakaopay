@@ -18,7 +18,6 @@ public class Approximation {
 
     @Id
     @GeneratedValue
-    private int id;
     private String bank;
     private int year;
     private int month;

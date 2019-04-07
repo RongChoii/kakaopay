@@ -1,6 +1,6 @@
 package com.kakaopay.finance.controller;
 
-import com.kakaopay.finance.model.basic1.SupplyListMain;
+import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.service.FinanceService;
@@ -24,7 +24,7 @@ public class FinanceController {
 
     @GetMapping("/api1")
     @ResponseBody
-    public SupplyListMain getFinanceNecessary1(){
+    public SupplyListTotal getFinanceNecessary1(){
 
         return service.getFinanceNecessary1();
     }

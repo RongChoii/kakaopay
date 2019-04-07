@@ -17,5 +17,5 @@ public class BankStatistics {
 
     @Id
     private String bank;
-//    private List<YearName> support_amount111;
+//    private List<YearAmount> support_amount111;
 }

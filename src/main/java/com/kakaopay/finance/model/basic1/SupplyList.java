@@ -19,7 +19,6 @@ public class SupplyList {
 
     @Id
     @GeneratedValue
-    private int id;
     private String year;
     private int total_amount;
     private List<SupplyBank> detail_amount;

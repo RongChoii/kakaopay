@@ -18,8 +18,8 @@ public class FileDto {
 
     @Id
     @GeneratedValue
-    @Column(name="sequence", nullable = false)
-    private int sequence;
+    @Column(name="seq", nullable = false)
+    private int seq;
 
     private int year;
     private int month;

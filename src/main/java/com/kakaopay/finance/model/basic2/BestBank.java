@@ -9,13 +9,13 @@ import org.springframework.data.annotation.Id;
 import javax.persistence.GeneratedValue;
 
 @Builder
-@Data//lombok getter & setter & tostring
-@AllArgsConstructor //생성자
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class BestBank {
 
     @Id
-    @GeneratedValue//자동 생성값..?...후... 모지...시퀀스같은거래.. 조사해보쟈 ~.~
+    @GeneratedValue
     private int year;
     private String bank;
 

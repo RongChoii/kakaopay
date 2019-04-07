@@ -4,19 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Entity;
 
-import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="FILE_DTO")
 public class FileDto {
 
     @Id
-    private int seq;
+    @GeneratedValue
+    @Column(name="sequence", nullable = false)
+    private int sequence;
 
     private int year;
     private int month;

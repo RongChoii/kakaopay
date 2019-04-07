@@ -1,7 +1,9 @@
 package com.kakaopay.finance.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.kakaopay.finance.model.file.FileDto;
+
+import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConverterUtil {
@@ -69,5 +71,34 @@ public class ConverterUtil {
         return null;
     }
 
+    public static List<String> convertToBasicFormat(List<String> param) {
+        return new ArrayList<String>(){{
+            param.forEach(target -> {
+                Matcher matcher = Pattern.compile("\"\\d,\\d\\d\\d|\"").matcher(target);
+                String group;
+                while(matcher.find()) {
+                    group = matcher.group();
+                    target = target.replaceAll(group, group.replaceAll(",", ""));
+                }
+                add(target.replaceAll("\"", ""));
+            });
+        }};
+    }
 
+    public static Map convertFromStringToMapFormat(String param) {
+        return new HashMap(){{
+            List<String> list = Arrays.asList(param.split(","));
+
+            for(int i=0; i<list.size(); i++){
+                put(FileDto.class.getDeclaredFields()[i].getName(), list.get(i));
+            }
+        }};
+
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(convertFromStringToMapFormat("2011,7,5258,2296,1973,1213,2,573,1778,233,1062").toString());
+
+    }
 }

@@ -45,5 +45,9 @@ public class FinanceController {
         return service.getFinanceNecessary3();
     }
 
+    @GetMapping("/insert")
+    public void insertDate(){
+        service.insertData();
+    }
 
 }

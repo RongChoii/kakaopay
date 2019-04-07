@@ -1,16 +1,19 @@
 package com.kakaopay.finance.service;
 
+import com.kakaopay.finance.jpa.FinanceOperation;
 import com.kakaopay.finance.model.basic1.SupplyBank;
 import com.kakaopay.finance.model.basic1.SupplyList;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
+import com.kakaopay.finance.model.basic3.YearAmount;
 import com.kakaopay.finance.util.ConverterUtil;
 import com.kakaopay.finance.util.FileReaderUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FinanceService {
@@ -21,7 +24,8 @@ public class FinanceService {
 //        "C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv")));
         List<String> fileReader =
         FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
-        fileReader = ConverterUtil.insertCsv(fileReader);
+//        fileReader = ConverterUtil.insertCsv(fileReader);
+        fileReader = ConverterUtil.convertToBasicFormat(fileReader);
         System.out.println(">>>> " + fileReader.toString());
 
         return new SupplyListTotal(1,"주택금융 공급현황",
@@ -61,18 +65,33 @@ public class FinanceService {
     }
 
     public BestBank getFinanceNecessary2(){
+
         return new BestBank(2010, "국민은행");
     }
 
     public BankStatistics getFinanceNecessary3(){
 
-        return new BankStatistics("외환은행"
-//                new ArrayList<YearAmount>(){{
-//                    add(new YearName(2008, 78));
-//                    add(new YearName(2015, 1702));
-//                }}
+        return new BankStatistics("외환은행",
+                new ArrayList<YearAmount>(){{
+                    add(new YearAmount(2008, 78));
+                    add(new YearAmount(2015, 1702));
+                }}
         );
 
+    }
+
+    public void insertData(){
+        List<String> fileReader =
+                FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
+//        fileReader = ConverterUtil.insertCsv(fileReader);
+        fileReader = ConverterUtil.convertToBasicFormat(fileReader);
+
+        List<Map<String, Integer>> param = new ArrayList<>();
+//        param.add({{
+////            new Map<>()
+//
+//        }})
+        new FinanceOperation().begin().insertEntity(null).commitAndClose();
     }
 
 }

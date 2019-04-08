@@ -2,6 +2,7 @@ package com.kakaopay.finance.service;
 
 import com.kakaopay.finance.jpa.AgencyRepository;
 import com.kakaopay.finance.jpa.FinanceRepository;
+import com.kakaopay.finance.jpa.SupplyDataRepository;
 import com.kakaopay.finance.model.basic1.SupplyBank;
 import com.kakaopay.finance.model.basic1.SupplyList;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
@@ -10,6 +11,7 @@ import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.model.basic3.YearAmount;
 import com.kakaopay.finance.model.file.Agency;
 import com.kakaopay.finance.model.file.FileDto;
+import com.kakaopay.finance.model.file.SupplyData;
 import com.kakaopay.finance.util.ConverterUtil;
 import com.kakaopay.finance.util.FileReaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class FinanceService {
@@ -31,45 +32,87 @@ public class FinanceService {
     @Autowired
     AgencyRepository agencyRepository;
 
+    @Autowired
+    SupplyDataRepository supplyDataRepository;
+
+    enum Bank{
+        주택도시기금1, 국민은행, 우리은행, 신한은행, 한국시티은행
+        ,하나은행, 농협은행_수협은행, 외환은행, 기타은행
+    }
+
     /* 기본문제 (1) 데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API 개발 */
     public String insertData(){
 
         List<String> fileReader = FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
         fileReader = ConverterUtil.convertToBasicFormat(fileReader);
 
+        int year=0;
+        int month=0;
+        List<String> headRow = new ArrayList<>();
         for(int i=0; i<fileReader.size(); i++){
 
-            if(i==0){
-                List<String> agencyArr = Arrays.asList(fileReader.get(i).split(","));
+            if(i==0) {
+                headRow = Arrays.asList(fileReader.get(i).split(","));
+                continue;
+            }
 
-                for(int j=2; j< agencyArr.size(); j++){//년도(i=0), 월(i=1) 제외하고, Agency 테이블에 추가
-                    System.out.println("@@@ " + agencyArr.get(j));
-                    agencyRepository.save(
-                            new Agency().builder().name(agencyArr.get(j)).build()
-                    );
+            List<String> supplyList = Arrays.asList(fileReader.get(i).split(","));
+            for(int j=0; j<supplyList.size(); j++){
+                if(j==0){
+                    year = Integer.parseInt(supplyList.get(j));
+                    continue;
                 }
 
-            }else{
-                Map<String, String> map = ConverterUtil.convertFromStringToMapFormat(fileReader.get(i));
+                if(j==1){
+                    month = Integer.parseInt(supplyList.get(j));
+                    continue;
+                }
 
-                financeRepository.save(
-                        new FileDto()
-                                .builder()
-                                .year(Integer.parseInt(map.get("year")))
-                                .month(Integer.parseInt(map.get("month")))
-                                .molitFd(Integer.parseInt(map.get("molitFd")))
-                                .kbBank(Integer.parseInt(map.get("kbBank")))
-                                .wrBank(Integer.parseInt(map.get("wrBank")))
-                                .shBank(Integer.parseInt(map.get("shBank")))
-                                .citiBank(Integer.parseInt(map.get("citiBank")))
-                                .hnBank(Integer.parseInt(map.get("hnBank")))
-                                .nhBank(Integer.parseInt(map.get("nhBank")))
-                                .kebBank(Integer.parseInt(map.get("kebBank")))
-                                .etcBank(Integer.parseInt(map.get("etcBank")))
+                supplyDataRepository.save(
+                        new SupplyData().builder()
+                                .year(year).month(month)
+                                .bank(headRow.get(j).substring(0,headRow.get(j).length()-4))
+                                .amount(Integer.parseInt(supplyList.get(j)))
                                 .build()
                 );
             }
         }
+//        List<String> fileReader = FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
+//        fileReader = ConverterUtil.convertToBasicFormat(fileReader);
+//
+//        for(int i=0; i<fileReader.size(); i++){
+//
+//            if(i==0){
+//                List<String> agencyArr = Arrays.asList(fileReader.get(i).split(","));
+//
+//                for(int j=2; j< agencyArr.size(); j++){//년도(i=0), 월(i=1) 제외하고, Agency 테이블에 추가
+//                    System.out.println("@@@ " + agencyArr.get(j));
+//                    agencyRepository.save(
+//                            new Agency().builder().name(agencyArr.get(j)).build()
+//                    );
+//                }
+//
+//            }else{
+//                Map<String, String> map = ConverterUtil.convertFromStringToMapFormat(fileReader.get(i));
+//
+//                financeRepository.save(
+//                        new FileDto()
+//                                .builder()
+//                                .year(Integer.parseInt(map.get("year")))
+//                                .month(Integer.parseInt(map.get("month")))
+//                                .molitFd(Integer.parseInt(map.get("molitFd")))
+//                                .kbBank(Integer.parseInt(map.get("kbBank")))
+//                                .wrBank(Integer.parseInt(map.get("wrBank")))
+//                                .shBank(Integer.parseInt(map.get("shBank")))
+//                                .citiBank(Integer.parseInt(map.get("citiBank")))
+//                                .hnBank(Integer.parseInt(map.get("hnBank")))
+//                                .nhBank(Integer.parseInt(map.get("nhBank")))
+//                                .kebBank(Integer.parseInt(map.get("kebBank")))
+//                                .etcBank(Integer.parseInt(map.get("etcBank")))
+//                                .build()
+//                );
+//            }
+//        }
 
         return "success";
     }

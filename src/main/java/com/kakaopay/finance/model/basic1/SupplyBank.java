@@ -19,5 +19,4 @@ public class SupplyBank {
     private String bank;
     private int amount;
 
-
 }

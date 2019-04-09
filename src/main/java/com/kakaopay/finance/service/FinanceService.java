@@ -1,7 +1,5 @@
 package com.kakaopay.finance.service;
 
-import com.kakaopay.finance.jpa.AgencyRepository;
-import com.kakaopay.finance.jpa.FinanceRepository;
 import com.kakaopay.finance.jpa.SupplyDataRepository;
 import com.kakaopay.finance.model.basic1.SupplyBank;
 import com.kakaopay.finance.model.basic1.SupplyList;
@@ -9,14 +7,10 @@ import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.model.basic3.YearAmount;
-import com.kakaopay.finance.model.file.Agency;
-import com.kakaopay.finance.model.file.FileDto;
 import com.kakaopay.finance.model.file.SupplyData;
 import com.kakaopay.finance.util.ConverterUtil;
 import com.kakaopay.finance.util.FileReaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,18 +21,12 @@ import java.util.List;
 public class FinanceService {
 
     @Autowired
-    FinanceRepository financeRepository;
-
-    @Autowired
-    AgencyRepository agencyRepository;
-
-    @Autowired
     SupplyDataRepository supplyDataRepository;
 
-    enum Bank{
-        주택도시기금1, 국민은행, 우리은행, 신한은행, 한국시티은행
-        ,하나은행, 농협은행_수협은행, 외환은행, 기타은행
-    }
+//    enum Bank{
+//        주택도시기금1, 국민은행, 우리은행, 신한은행, 한국시티은행
+//        ,하나은행, 농협은행_수협은행, 외환은행, 기타은행
+//    }
 
     /* 기본문제 (1) 데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API 개발 */
     public String insertData(){
@@ -117,22 +105,17 @@ public class FinanceService {
         return "success";
     }
 
-    public Page<FileDto> getFileDtoList(Pageable pageable) {
-        return financeRepository.findAll(pageable);
-    }
+//    public Page<FileDto> getFileDtoList(Pageable pageable) {
+//        return financeRepository.findAll(pageable);
+//    }
 
     /* 기본문제_(2) : 주택금융 공급 금융기관(은행) 목록을 출력하는 API를 개발하세요.  */
-    public Page<Agency> getBankList(Pageable pageable){
-        return agencyRepository.findAll(pageable);
+    public Object getBankList(){
+        return supplyDataRepository.findBankList();
     }
 
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 */
-    public SupplyListTotal getFinanceNecessary1(){
-//        "C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv")));
-        List<String> fileReader =
-        FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
-        fileReader = ConverterUtil.convertToBasicFormat(fileReader);
-        System.out.println(">>>> " + fileReader.toString());
+    public SupplyListTotal getBankAmountPerYear(){
 
         return new SupplyListTotal(1,"주택금융 공급현황",
                 new ArrayList<SupplyList>(){{

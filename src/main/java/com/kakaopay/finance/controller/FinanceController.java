@@ -3,14 +3,8 @@ package com.kakaopay.finance.controller;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
-import com.kakaopay.finance.model.file.Agency;
-import com.kakaopay.finance.model.file.FileDto;
 import com.kakaopay.finance.service.FinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,25 +29,20 @@ public class FinanceController {
         return service.insertData();
     }
 
-    @GetMapping("/getTotal")
-    @ResponseBody
-    public Page<FileDto> getFileDtoList(@PageableDefault(size=10, sort="seq",direction = Sort.Direction.ASC) Pageable pageable){
-        return service.getFileDtoList(pageable);
-    }
-
     /* 기본문제_(2) : 주택금융 공급 금융기관(은행) 목록을 출력하는 API를 개발하세요.  */
     @GetMapping("/bankList")
     @ResponseBody
-    public Page<Agency> getBankList(@PageableDefault(size=10, sort="seq",direction = Sort.Direction.ASC) Pageable pageable){
-        return service.getBankList(pageable);
+    public Object getBankList(){
+//        return service.getBankList();
+        return service.getBankList();
     }
 
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 */
-    @GetMapping("/api1")
+    @GetMapping("/bankAmountPerYear")
     @ResponseBody
-    public SupplyListTotal getFinanceNecessary1(){
+    public SupplyListTotal getBankAmountPerYear(){
 
-        return service.getFinanceNecessary1();
+        return service.getBankAmountPerYear();
     }
 
     /* 기본문제_(4) : 각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명  */

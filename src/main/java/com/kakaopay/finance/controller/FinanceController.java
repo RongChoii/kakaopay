@@ -38,7 +38,7 @@ public class FinanceController {
     }
 
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 */
-    @GetMapping("/bankAmountPerYear")
+    @GetMapping("/api1")
     @ResponseBody
     public SupplyListTotal getBankAmountPerYear(){
 

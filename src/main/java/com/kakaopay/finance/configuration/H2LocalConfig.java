@@ -12,9 +12,11 @@ import java.util.Map;
 public class H2LocalConfig {
 
 //    @Value("spring.datasource.url") //@@@@@@@@@@@
-    static String url = "jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUTO_SERVER=TRUE;";
+//    static String url = "jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUTO_SERVER=TRUE;";
 //    static String url = "jdbc:h2:tcp://localhost:8080/financeDB;AUTO_SERVER=TRUE";
 //    static String url = "jdbc:h2:mem:financeDB;DB_CLOSE_ON_EXIT=FALSE;";
+
+    static String url = "jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB?useUnicode=yes&characterEncoding=UTF-8";
 
 //    @Value("spring.datasource.username")
     static String username="kakao";

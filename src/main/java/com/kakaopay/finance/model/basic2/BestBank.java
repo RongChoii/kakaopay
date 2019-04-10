@@ -21,5 +21,7 @@ public class BestBank {
     private int year;
     private String bank;
 
+//    @Transient
+    private int amount;
 
 }

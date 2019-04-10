@@ -1,8 +1,7 @@
 package com.kakaopay.finance.util;
 
-import com.kakaopay.finance.model.file.FileDto;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,15 +22,4 @@ public class ConverterUtil {
         }};
     }
 
-    public static Map convertFromStringToMapFormat(String param) {
-        return new HashMap(){{
-            List<String> list = Arrays.asList(param.split(","));
-
-            for(int i=0; i<list.size(); i++){
-                put(FileDto.class.getDeclaredFields()[i+1].getName(), list.get(i));
-//                System.out.println(FileDto.class.getDeclaredFields()[i+1].getName() + "/" +  list.get(i));
-            }
-        }};
-
-    }
 }

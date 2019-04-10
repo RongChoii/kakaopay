@@ -1,6 +1,8 @@
 package com.kakaopay.finance.service;
 
+import com.kakaopay.finance.jpa.SupplyBankRepository;
 import com.kakaopay.finance.jpa.SupplyDataRepository;
+import com.kakaopay.finance.jpa.YearAmountRepository;
 import com.kakaopay.finance.model.basic1.SupplyBank;
 import com.kakaopay.finance.model.basic1.SupplyList;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -22,6 +25,12 @@ public class FinanceService {
 
     @Autowired
     SupplyDataRepository supplyDataRepository;
+
+    @Autowired
+    SupplyBankRepository supplyBankRepository;
+
+    @Autowired
+    YearAmountRepository yearAmountRepository;
 
 //    enum Bank{
 //        주택도시기금1, 국민은행, 우리은행, 신한은행, 한국시티은행
@@ -33,6 +42,8 @@ public class FinanceService {
 
         List<String> fileReader = FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
         fileReader = ConverterUtil.convertToBasicFormat(fileReader);
+
+        supplyDataRepository.deleteAll();
 
         int year=0;
         int month=0;
@@ -117,40 +128,69 @@ public class FinanceService {
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 */
     public SupplyListTotal getBankAmountPerYear(){
 
-        return new SupplyListTotal(1,"주택금융 공급현황",
+        List<YearAmount> yearList = yearAmountRepository.selectYearTotal();
+        System.out.println("@@@@@@ yearList : " + yearList.toString());
+
+        return new SupplyListTotal(1, "주택금융 공급현황",
                 new ArrayList<SupplyList>(){{
-                    add(new SupplyList(
-                            "2004 년", 14145,
-                            new ArrayList<SupplyBank>(){{
-                                add(new SupplyBank("주택도시기금", 2143));
-                                add(new SupplyBank("국민은행", 4356));
-                                add(new SupplyBank("우리은행", 5342));
-                                add(new SupplyBank("기타은행", 1324));
-                            }}
-                    ));
-
-                    add(new SupplyList(
-                            "2005 년", 23145,
-                            new ArrayList<SupplyBank>(){{
-                                add(new SupplyBank("주택도시기금", 1243));
-                                add(new SupplyBank("국민은행", 5336));
-                                add(new SupplyBank("우리은행", 4849));
-                                add(new SupplyBank("기타은행", 1093));
-                            }}
-                    ));
-
-                    add(new SupplyList(
-                            "2017 ", 33145,
-                            new ArrayList<SupplyBank>(){{
-                                add(new SupplyBank("주택도시기금", 1243));
-                                add(new SupplyBank("국민은행", 5336));
-                                add(new SupplyBank("우리은행", 4849));
-                                add(new SupplyBank("기타은행", 1093));
-                            }}
-                    ));
-
+                    yearList.forEach(year -> {
+                        add(new SupplyList(
+                                String.valueOf(year.getYear())+"년",
+                                year.getAmount(),
+                                new HashMap<String, Object>(){{
+                                    int i=0;
+                                    for(SupplyBank sb : supplyBankRepository.selectAmountPerBankByYear(year.getYear())){
+                                        put(supplyBankRepository.selectAmountPerBankByYear(year.getYear()).get(i).getBank()
+                                        , supplyBankRepository.selectAmountPerBankByYear(year.getYear()).get(i).getSum_amount());
+                                        i++;
+                                    }
+                                }}
+//                                supplyBankRepository.selectAmountPerBankByYear(year.getYear())
+//                                detailAmount.put(EBank.valueOf(supplyBankRepository.selectAmountPerBankByYear(year.getYear()).get(0).getBank()).getBankName(), 1234141414)
+                        ));
+                    });
                 }}
         );
+
+
+
+
+
+//        return  null;
+//        return new SupplyListTotal(1,"주택금융 공급현황",
+//                new ArrayList<SupplyList>(){{
+//                    add(new SupplyList(
+//                            "2004 년", 14145,
+//                            new ArrayList<SupplyBank>(){{
+//                                add(new SupplyBank("주택도시기금", 2143));
+//                                add(new SupplyBank("국민은행", 4356));
+//                                add(new SupplyBank("우리은행", 5342));
+//                                add(new SupplyBank("기타은행", 1324));
+//                            }}
+//                    ));
+//
+//                    add(new SupplyList(
+//                            "2005 년", 23145,
+//                            new ArrayList<SupplyBank>(){{
+//                                add(new SupplyBank("주택도시기금", 1243));
+//                                add(new SupplyBank("국민은행", 5336));
+//                                add(new SupplyBank("우리은행", 4849));
+//                                add(new SupplyBank("기타은행", 1093));
+//                            }}
+//                    ));
+//
+//                    add(new SupplyList(
+//                            "2017 ", 33145,
+//                            new ArrayList<SupplyBank>(){{
+//                                add(new SupplyBank("주택도시기금", 1243));
+//                                add(new SupplyBank("국민은행", 5336));
+//                                add(new SupplyBank("우리은행", 4849));
+//                                add(new SupplyBank("기타은행", 1093));
+//                            }}
+//                    ));
+//
+//                }}
+//        );
     }
 
     /* 기본문제_(4) : 각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명  */
@@ -161,13 +201,18 @@ public class FinanceService {
 
     /* 기본문제_(5) : 전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액  */
     public BankStatistics getFinanceNecessary3(){
-
-        return new BankStatistics("외환은행",
-                new ArrayList<YearAmount>(){{
-                    add(new YearAmount(2008, 78));
-                    add(new YearAmount(2015, 1702));
-                }}
-        );
+        List<YearAmount> supportAmount = new ArrayList<>();
+        for(YearAmount ya : yearAmountRepository.selectYearTotal()){
+            int year = ya.getYear();
+            int max = 0;
+            int min = 0;
+            for(YearAmount sd : yearAmountRepository.selectBankAmountByYear(year)){
+                if(max < sd.getAmount()) max = sd.getAmount();
+                if(min > sd.getAmount()) min = sd.getAmount();
+            }
+            supportAmount.add(new YearAmount(year, max - min));
+        }
+        return new BankStatistics("외환은행", supportAmount);
     }
 
     /* 추가문제 : 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 */

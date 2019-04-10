@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.GeneratedValue;
-import java.util.List;
+import javax.persistence.Id;
+import java.util.Map;
 
 @Builder
 @Data
@@ -19,7 +19,7 @@ public class SupplyList {
     @GeneratedValue
     private String year;
     private int total_amount;
-    private List<SupplyBank> detail_amount;
+    private Map<String, Object> detail_amount;
 
 
 }

@@ -219,6 +219,7 @@
 > Method : GET
 
 - JSON 리턴 객체 : BestBank
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | integer |
@@ -248,14 +249,14 @@
 >
 > Method : GET
 
-> 입력
+- 입력
 
 | 컬럼  | Type   |
 | :---- | :----- |
 | bank | String |
 | month | integer |
 
-> 출력
+- 출력
 
 | 컬럼  | Type   |
 | :---- | :----- |

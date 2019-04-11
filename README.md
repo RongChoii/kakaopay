@@ -92,10 +92,10 @@
 읽어온 *년월별 금융기관 지원금액*에 대한 SupplyData 엔티티 생성
 - ~~id, year, month, molitFd, kbBank, wrBank, shBank, sitiBank, hnBank, nhBank, kebBank, etcBank~~
 - ~~id, year, month, bank, amount~~
-- 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 <u>year, month, bank, amount</u>컬럼으로 저장한다.
+- 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 ** year, month, bank, amount ** 컬럼으로 저장한다.
 
 제약사항에 해당하는 *금융기관*에 대한 InstituteDate 엔티티 생성
--<u>기관명, 기관코드</u> 컬럼
+- **기관명, 기관코드** 컬럼
 
 
 ## 2.5 controller / service / Repository 생성

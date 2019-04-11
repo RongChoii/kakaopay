@@ -38,7 +38,7 @@
 
 ## 1.2 제약사항
 
-- **ORM(Object Relational Mapping)**을 사용하여 엔티티 정의 및 레퍼지토리 개발
+- **ORM(Object Relational Mapping)** 을 사용하여 엔티티 정의 및 레퍼지토리 개발
 	- Java 의 경우 **JPA**
 	- 주택금융 공급기관(은행)은 독립 엔티티(기관명과 기관코드)로 디자인
 

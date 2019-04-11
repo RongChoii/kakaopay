@@ -162,10 +162,18 @@
 <br>
 
 
-## 4. API 정보 및 실행방법
+## 4. API 정보 및 실행 방법
+```
+1. com.kakaopay.finance.service의 FinanceSevice의 49 line의 CSV 경로 수정
+`String csvPath = "C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv";`
 
-### 4.0 실행방법
-현재 gitHub
+2. application.properties 의 2 line 의 DB 경로 수정
+`spring.datasource.url=jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUTO_SERVER=TRUE;`
+
+3. 메인화면 접속 (localhost)
+
+4. [데이터 저장] 버튼으로 csv파일을 DB에 저장한 뒤 각 API 에 따라 통계 데이터(JSON 형태) 확인
+```
 
 ### 4.1 데이터 저장 API
 > URL : /f/insert

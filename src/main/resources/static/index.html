@@ -11,10 +11,83 @@
 </head>
 <script>
 	var pageSubmitFn = function(value){
-		if(/mmm
+		if(value === "bankList"){
+			alert("은행 목록 출력");
+			location.href="/f/bankList";
 
+		}else if(value === "sumPerBankPerYear"){
+			alert("각 년도 별 은행별 지원금액 합계");
+			location.href="/f/sumPerBankPerYear";
 
+		}else if(value === "maxPerData"){
+			alert("가장 큰 년,은행별 지원금액 합계");
+			location.href="/f/maxPerData";
+
+		}else if(value === "maxMinForKeb"){
+			alert("외환은행의 최대 최소 년도와 합계");
+			location.href="/f/maxMinForKeb";
+
+		}else if(value === "estimateValue"){
+			alert("특정 년월의 지원금액 예상");
+			location.href="/f/estimateValue";
+		}
 	}
+
+	var yearBank = { year: "2005", bank: "123" };
+
+	$(document).ready(function() {
+		$("#callBankList").click(function() {
+			var result = document.getElementById('bankListValue');
+			$.ajax({
+				url : "/f/bankList",
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					result.innerHTML = data;
+				},
+				error : function(e) {
+					console.log(e.responseText);
+				}
+			});
+		});
+
+		$("#callSumPerBankPerYear").click(function() {
+			var result = document.getElementById('sumPerBankPerYearValue');
+			$.ajax({
+				url : "/f/sumPerBankPerYear",
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					result.innerHTML = data;
+				},
+				error : function(e) {
+					console.log(e.responseText);
+				}
+			});
+		});
+
+		$("#callMaxPerData").click(function() {
+			var result = document.getElementById('maxPerDataValue');
+			$.ajax({
+				url : "/f/maxPerData",
+				method: "get",
+				type: "json",
+				contentType: "application/json",
+				data: JSON.stringify(yearBank),
+				success : function(data) {
+					console.log(data);
+					result.innerHTML = data;
+				},
+				error : function(e) {
+					console.log(e.responseText);
+				}
+			});
+		});
+
+
+	});
+
+
 </script>
 <body>
 
@@ -48,38 +121,45 @@
 
 	<!-- Example row of columns -->
 	<div class="row">
+		<!-- 기본문제_(2) : /f/bankList -->
 		<div class="col-lg-4">
 			<h2>주택금융 공급 금융기관(은행) 목록을 출력하는 API</h2>
 			<p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
 <!--			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>-->
-			<p><a class="btn btn-primary" href="#" role="button">Call API</a></p>
-			<textarea></textarea>
+			<p><a class="btn btn-primary" onClick="pageSubmitFn('bankList')" role="button">Call API_url</a></p>
+			<p><a class="btn btn-primary" id="callBankList" role="button">Call API_ajax</a></p>
+			<div id="bankListValue"></div>
 		</div>
+		<!-- 기본문제_(3) : /f/sumPerBankPerYear -->
 		<div class="col-lg-4">
 			<h2>년도별 각 금융기관의 지원금액 합계를 출력하는 API</h2>
 			<p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
 <!--			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>-->
-			<p><a class="btn btn-primary" href="#" role="button">Call API</a></p>
-			<textarea></textarea>
+			<p><a class="btn btn-primary" onClick="pageSubmitFn('sumPerBankPerYear')" role="button">Call API</a></p>
+			<p><a class="btn btn-primary" id="callSumPerBankPerYear" role="button">Call API_ajax</a></p>
+			<div id="sumPerBankPerYearValue"></div>
 		</div>
+		<!-- 기본문제_(4) : /f/maxPerData -->
 		<div class="col-lg-4">
 			<h2>각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 출력하는 API</h2>
 			<p class="text-danger">예를들어, 2005년 ~2017년 중에 2010년 국민은행의 전체 지원금액(1월~12월 지원 합계)이 가장 높았다면 { “year": “2010” , "bank": “국민은행”}을 결과로 출력합니다.</p>
 <!--			<p>예를들어, 2005년 ~2017년 중에 2010년 국민은행의 전체 지원금액(1월~12월 지원 합계)이 가장 높았다면 { “year": “2010” , "bank": “국민은행”}을 결과로 출력합니다.</p>-->
-			<p><a class="btn btn-primary" href="#" role="button">Call API</a></p>
-			<textarea></textarea>
+			<p><a class="btn btn-primary" onClick="pageSubmitFn('maxPerData')" role="button">Call API</a></p>
+			<p><a class="btn btn-primary" id="callMaxPerData" role="button">Call API_ajax</a></p>
+			<div id="maxPerDataValue"></div>
 		</div>
+		<!-- 기본문제_(5) : /f/maxMinForKeb -->
 		<div class="col-lg-4">
 			<h2>전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API 개발 </h2>
 			<p class="text-danger">예를들어, 2005년 ~ 2016년 외환은행의 평균 지원금액 (매년 12달의 지원금액 평균값)을 계산하여 가장 작은 값과 큰 값을 출력합니다. 소수점 이하는 반올림해서 계산하세요. </p>
-			<p><a class="btn btn-primary" href="#" role="button">Call API</a></p>
+			<p><a class="btn btn-primary" onClick="pageSubmitFn('maxMinForKeb')" role="button">Call API</a></p>
 			<textarea></textarea>
-
+		<!-- 추가문제 : /f/estimateValue -->
 		</div>
 		<div class="col-lg-4">
 			<h2>추가문제 !</h2>
 			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-			<p><a class="btn btn-primary" href="#" role="button">Call API</a></p>
+			<p><a class="btn btn-primary" onClick="pageSubmitFn('estimateValue')" role="button">Call API</a></p>
 			<textarea></textarea>
 		</div>
 	</div>

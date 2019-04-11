@@ -52,11 +52,11 @@ public class FinanceService {
 
             List<String> supplyList = Arrays.asList(fileReader.get(i).split(","));
             for(int j=0; j<supplyList.size(); j++){
+
                 if(j==0){
                     year = Integer.parseInt(supplyList.get(j));
                     continue;
                 }
-
                 if(j==1){
                     month = Integer.parseInt(supplyList.get(j));
                     continue;
@@ -71,7 +71,6 @@ public class FinanceService {
                 );
             }
         }
-
         return "success";
     }
 
@@ -81,7 +80,7 @@ public class FinanceService {
     }
 
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 --> 완료 */
-    public SupplyListTotal getBankAmountPerYear(){
+    public SupplyListTotal getSumPerBankPerYear(){
         List<YearAmount> yearList = yearAmountRepository.selectYearTotal();
 
         return new SupplyListTotal(1, "주택금융 공급현황",
@@ -108,12 +107,12 @@ public class FinanceService {
     }
 
     /* 기본문제_(4) : 각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명 -> 완료 */
-    public BestBank getFinanceNecessary2(){
+    public BestBank getMaxPerData(){
         return bestBankRepository.selectBsetBank();
     }
 
     /* 기본문제_(5) : 전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액  --> 완료 */
-    public BankStatistics getFinanceNecessary3() {
+    public BankStatistics getMaxMinForKeb() {
         int min = 0, max = 0;
         List<YearAmount> yearAmountList = yearAmountRepository.selectYearAmount();
         HashMap<String, Integer> maxMin = new HashMap<>();

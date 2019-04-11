@@ -114,8 +114,22 @@
 
 ## 3. 개발
 
-### 3.1 Entity
+### 3.1 Database
+
+### 3.2 Entity
+
+### 3.3 Repository
+
+### 3.4 jUnit Test
 
 
+## 4. API 정보 및 실행 방법
 
-
+### 4.1 데이터 저장 API
+> URL : /f/insert
+>
+> Method : GET
+>
+>	Entity : SupplyData
+>
+>	Table : SUPPLY_DATA

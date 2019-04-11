@@ -76,7 +76,7 @@
 ```
 - DB 연결 설정 : url, username, password
 - H2 접속 설정 : path
-- Hibernate 설정 : update, create-drop
+- Hibernate 설정 : update / create-drop
 ```
 
 ### 2.4 Entity 생성
@@ -128,14 +128,24 @@
 > 외환은행을 파라미터로 받아 연도와 은행으로 그룹화한 금액의 최대 / 최소의 차이를 로직에서 비교 후 리턴
 > `SELECT AVG(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA WHERE BANK='외환은행' GROUP BY YEAR, BANK;`
 
+## 3. 데이터베이스
+*.csv 파일을 읽어와서 데이터가 저장되는 두 가지 테이블*
 
-## 3. 개발
+### 3.1 모든 API의 기본 테이블
+- SupplyData
+| 컬럼  | Type   |
+| :---- | :----- |
+| year | integer |
+| month | integer |
+| bank | String |
+| amount | integer |
 
-### 3.1 Database
-
-### 3.2 Repository
-
-### 3.3 Junit Test
+### 3.2 금융기관 : InstituteData
+- InstituteData
+| 컬럼  | Type   |
+| :---- | :----- |
+| instituteName | String |
+| instituteCode | String |
 
 
 ## 4. API 정보 및 실행 방법
@@ -145,8 +155,7 @@
 >
 > Method : GET
 
-> SupplyData
-
+- 저장 Table : SupplyData
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | integer |
@@ -159,18 +168,31 @@
 >
 > Method : GET
 
-> Bank
-
+- JSON 리턴 객체 : List<Bank>
+- Bank
 | 컬럼  | Type   |
 | :---- | :----- |
-| bank | String | 
+| bank | String |
 
 ### 4.3 년도별 각 금융기관의 지원금액 합계 출력 API
 > URL : /f/sumPerBankPerYear
 >
 > Method : GET
 
-> 0000
+- JSON 리턴 객체 : SupplyListTotal
+- SupplyListTotal
+| 컬럼  | Type   |
+| :---- | :----- |
+| id | integer |
+| name | String |
+| list | List<SupplyList> |
+
+- SupplyList
+| 컬럼  | Type   |
+| :---- | :----- |
+| year | String |
+| total_amount | int |
+| detail_amount | Map<String, Object> |
 
 
 ### 4.4 각 년도별 각 금융기관의 전체 지원금액 중에서 가장 큰 금액의 년도와 금융기관 출력 API
@@ -178,8 +200,7 @@
 >
 > Method : GET
 
-> BestBank
-
+- JSON 리턴 객체 : BestBank
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | integer |
@@ -190,9 +211,17 @@
 >
 > Method : GET
 
-> 
+- JSON 리턴 객체 : BankStatistics
+| 컬럼  | Type   |
+| :---- | :----- |
+| bank | String |
+| support_amount | List<YearAmount> |
 
-
+- YearAmount
+| 컬럼  | Type   |
+| :---- | :----- |
+| year | integer |
+| amount | integer |
 
 ### 4.6 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 API
 > URL : /f/estimateValue

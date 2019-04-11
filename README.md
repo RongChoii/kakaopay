@@ -83,7 +83,7 @@
 
 .csv *년월별 금융기관 지원금액*에 대한 SupplyData 엔티티 생성
 ```
-- 고유 id를 포함한 ~~id, year, month, molitFd, kbBank, wrBank, shBank, sitiBank, hnBank, nhBank, kebBank, etcBank~~ 컬럼으로 엔티티를 생성하려 했지만,
+- 고유 id를 포함한 ~~id, year, month, molitFd, kbBank, ..., kebBank, etcBank~~ 컬럼으로 생성하려 했지만,
 - 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 **year, month, bank, amount** 컬럼으로 생성
 ```
 제약사항에 해당하는 *금융기관*에 대한 InstituteDate 엔티티 생성
@@ -100,11 +100,13 @@
 > .CSV파일의 한 row씩 읽을때 년, 월 레코드를 제외한 모든 column에서 save를 실행
 >
 > [YEAR, MONTH, BANK, AMOUNT] 테이블구조로 insert
+<br>
 
 (2) **주택금융 공급 금융기관(은행) 목록을 출력하는 API**
 >  Enum 클래스에 생성된 은행기관코드 입력 후 조회 쿼리 호출
 >
 > `SELECT BANK FROM SUPPLY_DATA;`
+<br>
 
 (3) **년도별 각 금융기관의 지원금액 합계를 출력하는 API**
 > return 해야할 json 형태의 하위구조에 따라 객체 list에 for문을 이용해서 하위 객체 생성
@@ -116,16 +118,19 @@
 > 연도별 금융기관 별 합계 조회 쿼리를 호출
 >
 > `SELECT BANK, SUM(AMOUNT) AS SUM_AMOUNT FROM SUPPLY_DATA WHERE YEAR = #{year} GROUP BY YEAR, BANK`
+<br>
 
 (4) **각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 출력하는 API**
 > 연도 및 은행명으로 그룹화하여 합계금액을 조회 후 로직에서 처리
 >
 > `SELECT SUM(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA GROUP BY YEAR, BANK;`
+<br>
 
 (5) **전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API**
 > 외환은행을 파라미터로 받아 연도와 은행으로 그룹화한 금액의 최대 / 최소의 차이를 로직에서 비교 후 리턴
 >
 > `SELECT AVG(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA WHERE BANK='외환은행' GROUP BY YEAR, BANK;`
+<br>
 
 (선택) **특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측하는 API**
 > 외환은행을 파라미터로 받아 연도와 은행으로 그룹화한 금액의 최대 / 최소의 차이를 로직에서 비교 후 리턴

@@ -100,13 +100,16 @@
 년, 월 레코드를 제외한 모든 column에서 save 실행
 ```
 1. **주택금융 공급 금융기관(은행) 목록을 출력하는 API**
+
 `
 SELECT BANK FROM SUPPLY_DATA;
 `
 1. **년도별 각 금융기관의 지원금액 합계를 출력하는 API**
+
 ```
 return 해야할 json 형태의 하위구조에 따라 객체 list에 for문을 이용해서 하위 객체 생성
 ```
+
 1. **각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 출력하는 API**
 
 `
@@ -114,6 +117,7 @@ SELECT SUM(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA GROUP BY YEAR, BANK;
 `
 
 1. **전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API**
+
 `
 SELECT AVG(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA WHERE='외환은행' GROUP BY YEAR, BAK;
 `

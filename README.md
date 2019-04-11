@@ -129,7 +129,51 @@
 > URL : /f/insert
 >
 > Method : GET
+
+> SupplyData
+
+| 컬럼  | Type   |
+| :---- | :----- |
+| year | integer |
+| month | integer |
+| bank | String |
+| amount | integer |
+
+### 4.2 은행 목록 출력 API
+> URL : /f/bankList
 >
->	Entity : SupplyData
+> Method : GET
+
+> Bank
+
+| 컬럼  | Type   |
+| :---- | :----- |
+| bank | String | 
+
+### 4.3 년도별 각 금융기관의 지원금액 합계 출력 API
+> URL : /f/sumPerBankPerYear
 >
->	Table : SUPPLY_DATA
+> Method : GET
+
+> 0000
+
+
+### 4.4 각 년도별 각 금융기관의 전체 지원금액 중에서 가장 큰 금액의 년도와 금융기관 출력 API
+> URL : /f/maxPerData
+>
+> Method : GET
+
+> BestBank
+
+| 컬럼  | Type   |
+| :---- | :----- |
+| year | integer |
+| bank | String |
+
+### 4.5 전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API
+> URL : /f/maxMinForKeb
+>
+> Method : GET
+
+> 
+

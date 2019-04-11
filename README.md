@@ -145,8 +145,7 @@
 ## 3. 데이터베이스
 *.csv 파일을 읽어와서 데이터가 저장되는 두 가지 테이블*
 
-### 3.1 모든 API의 기본 테이블
-- SupplyData
+### 3.1 전체 데이터 테이블 : SupplyData
 
 | 컬럼  | Type   |
 | :---- | :----- |
@@ -155,8 +154,7 @@
 | bank | String |
 | amount | integer |
 
-### 3.2 금융기관 : InstituteData
-- InstituteData
+### 3.2 금융기관 테이블 : InstituteData
 
 | 컬럼  | Type   |
 | :---- | :----- |

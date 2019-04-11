@@ -197,7 +197,6 @@
 > Method : GET
 
 - JSON 리턴 객체 : SupplyListTotal
-- SupplyListTotal
 
 | 컬럼  | Type   |
 | :---- | :----- |
@@ -231,12 +230,14 @@
 > Method : GET
 
 - JSON 리턴 객체 : BankStatistics
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | bank | String |
 | support_amount | List<YearAmount> |
 
 - YearAmount
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | integer |

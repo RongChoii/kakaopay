@@ -69,6 +69,7 @@
 
 ### 2.2 .csv 파일 읽어오기
 > BufferedReader 이용
+>
 > 머리행 한글 처리를 위해 EUC-KR로 Encoding 설정
 
 ### 2.3 데이터베이스 연결 및 저장
@@ -83,7 +84,9 @@
 
 .csv *년월별 금융기관 지원금액*에 대한 SupplyData 엔티티 생성
 > ~~id, year, month, molitFd, kbBank, wrBank, shBank, sitiBank, hnBank, nhBank, kebBank, etcBank~~
+>
 > ~~id, year, month, bank, amount~~
+>
 > 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 **year, month, bank, amount** 컬럼으로 저장한다.
 
 제약사항에 해당하는 *금융기관*에 대한 InstituteDate 엔티티 생성
@@ -91,6 +94,7 @@
 
 ### 2.5 insert 및 API 호출
 > JpaRepository에서 제공하는 save() 내장메소드 사용
+>
 > 각 API 호출시 return 해야할 데이터 별로 entity와 JpaRepository 만들어서 사용
 
 ### 2.6 문제 해결 전략

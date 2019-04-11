@@ -95,15 +95,12 @@
 
 ### 2.6 문제 해결 전략
 (1) **데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API**
-```
-.CSV파일의 한 row씩 읽을때 년, 월 레코드를 제외한 모든 column에서 save 실행하여 [YEAR, MONTH, BANK, AMOUNT] 테이블구조로 isnert
-```
+
+> .CSV파일의 한 row씩 읽을때 년, 월 레코드를 제외한 모든 column에서 save 실행하여 [YEAR, MONTH, BANK, AMOUNT] 테이블구조로 isnert
 
 (2) **주택금융 공급 금융기관(은행) 목록을 출력하는 API**
+> `SELECT BANK FROM SUPPLY_DATA;`
 
-`
-SELECT BANK FROM SUPPLY_DATA;
-`
 (3) **년도별 각 금융기관의 지원금액 합계를 출력하는 API**
 
 ```

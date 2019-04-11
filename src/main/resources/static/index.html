@@ -121,7 +121,23 @@
 			});
 		});
 
-		$("#bankListValue").set9
+		$("#approximateAmount").click(function() {
+			$.ajax({
+				url : "/f/approximateAmount",
+				data : {
+					  "bank" : $('#approximateAmountBank').val(),
+					  "month" : $('#approximateAmountMonth').val()
+					},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					$('#approximateAmountValue').val(JSON.stringify(data, null, '\t'));
+				},
+				error : function(e) {
+					console.log(e.responseText);
+				}
+			});
+		});
 
 	});
 </script>
@@ -160,9 +176,7 @@
 		<div class="col-lg-12 col-sm-6" >
 			<h2>주택금융 공급 금융기관(은행) 목록을 출력하는 API</h2>
 			<p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-<!--			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>-->
-<!--			<p><a class="btn btn-primary" onClick="pageSubmitFn('bankList')" role="button">Call API_url</a></p>-->
-			<p><a class="btn btn-primary" id="callBankList" role="button">Call API_ajax</a></p>
+			<p><a class="btn btn-primary" id="callBankList" role="button">Call API</a></p>
 			<textarea class="col-lg-12" rows="10" id="bankListValue"></textarea>
 		</div>
 	</div>
@@ -171,10 +185,8 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h2>년도별 각 금융기관의 지원금액 합계를 출력하는 API</h2>
-			<p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-<!--			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>-->
-<!--			<p><a class="btn btn-primary" onClick="pageSubmitFn('sumPerBankPerYear')" role="button">Call API</a></p>-->
-			<p><a class="btn btn-primary" id="callSumPerBankPerYear" role="button">Call API_ajax</a></p>
+			<p class="text-danger">특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측하는 API 개발</p>
+			<p><a class="btn btn-primary" id="callSumPerBankPerYear" role="button">Call API</a></p>
 			<textarea class="col-lg-12" rows="10" id="sumPerBankPerYearValue"></textarea>
 		</div>
 	</div>
@@ -183,10 +195,8 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h2>각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 출력하는 API</h2>
-			<p class="text-danger">예를들어, 2005년 ~2017년 중에 2010년 국민은행의 전체 지원금액(1월~12월 지원 합계)이 가장 높았다면 { “year": “2010” , "bank": “국민은행”}을 결과로 출력합니다.</p>
-<!--			<p>예를들어, 2005년 ~2017년 중에 2010년 국민은행의 전체 지원금액(1월~12월 지원 합계)이 가장 높았다면 { “year": “2010” , "bank": “국민은행”}을 결과로 출력합니다.</p>-->
-<!--			<p><a class="btn btn-primary" onClick="pageSubmitFn('maxPerData')" role="button">Call API</a></p>-->
-			<p><a class="btn btn-primary" id="callMaxPerData" role="button">Call API_ajax</a></p>
+			<p class="text-danger">예를들어, 2005년 ~2017년 중에 2010년 국민은행의 전체 지원금액(1월~12월 지원 합계)이 가장 높았다면 { “year": “2010” , "bank": “국민은행”}을 결과로 출력합니다. </p>
+			<p><a class="btn btn-primary" id="callMaxPerData" role="button">Call API</a></p>
 			<textarea class="col-lg-12" rows="10" id="maxPerDataValue"></textarea>
 		</div>
 	</div>
@@ -196,22 +206,32 @@
 		<div class="col-lg-12">
 			<h2>전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API 개발 </h2>
 			<p class="text-danger">예를들어, 2005년 ~ 2016년 외환은행의 평균 지원금액 (매년 12달의 지원금액 평균값)을 계산하여 가장 작은 값과 큰 값을 출력합니다. 소수점 이하는 반올림해서 계산하세요. </p>
-<!--			<p><a class="btn btn-primary" onClick="pageSubmitFn('maxMinForKeb')" role="button">Call API</a></p>-->
-			<p><a class="btn btn-primary" id="callMaxMinForKeb" role="button">Call API_ajax</a></p>
+			<p><a class="btn btn-primary" id="callMaxMinForKeb" role="button">Call API</a></p>
 			<textarea class="col-lg-12" rows="10" id="maxMinForKebValue"></textarea>
 		</div>
 	</div>
 
-	<!-- 추가문제 : /f/estimateValue -->
-<!--	<div class="row">-->
-<!--		<div class="col-lg-12">-->
-<!--			<h2>추가문제 !</h2>-->
-<!--			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>-->
-<!--&lt;!&ndash;			<p><a class="btn btn-primary" onClick="pageSubmitFn('estimateValue')" role="button">Call API</a></p>&ndash;&gt;-->
-<!--			<p><a class="btn btn-primary" id="callEstimateValue" role="button">Call API_ajax</a></p>-->
-<!--			<textarea class="col-lg-12" rows="10" id="estimateValue"></textarea>-->
-<!--		</div>-->
-<!--	</div>-->
+	<!-- 추가문제 : /f/approximateAmount -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h2>특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측하는 API 개발 </h2>
+			<p>단, 예측 알고리즘을 무엇을 써야하는지에 대한 제약은 없지만, 가장 근사치에 가까울 수록 높은 점수 부여</p>
+			<div class="col-lg-4">
+				<input type="text" id="approximateAmountBank" class="form-control" placeholder="은행명">
+			</div>
+			<div class="col-lg-4">
+				<input type="text" id="approximateAmountMonth" class="form-control" placeholder="월수">
+			</div>
+
+			<p><a class="btn btn-primary" id="approximateAmount" role="button">Call API</a></p>
+			<textarea class="col-lg-12" rows="10" id="approximateAmountValue"></textarea>
+		</div>
+	</div>
+</div>
+
+<div class="footer" style="height: 200px">
+
+
 </div>
 </body>
 </html>

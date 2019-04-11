@@ -66,10 +66,11 @@ public class FinanceController {
     }
 
     /* 추가문제 : 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 */
-    @GetMapping("/estimateValue")
+    @GetMapping("/approximateAmount")
     @ResponseBody
-    public Approximation getEstimationValue(
+    public Approximation approximateAmount(
             @RequestParam("bank") String bank, @RequestParam("month") int month){
         return service.getApproximateAmount(bank, month);
+//        return null;
     }
 }

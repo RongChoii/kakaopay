@@ -165,11 +165,13 @@
 ## 4. API 정보 및 실행 방법
 
 - **com.kakaopay.finance.service의 FinanceSevice의 49 line의 CSV 경로 수정**
+
 `
 String csvPath = "C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv";
 `
 
 - **application.properties 의 2 line 의 DB 경로 수정**
+
 `
 spring.datasource.url=jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUTO_SERVER=TRUE;
 `

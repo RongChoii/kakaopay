@@ -272,7 +272,7 @@ spring.datasource.url=jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUT
 | year | integer |
 | amount | integer |
 
-### 4.6 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 API
+### 4.6 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 API (미완성)
 > URL : /f/estimateValue
 >
 > Method : GET

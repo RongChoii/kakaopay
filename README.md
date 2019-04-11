@@ -5,23 +5,29 @@
 **개발환경**
 
 - Backend
-  - JAVA8
-  - Spring Boot 1.5.10
-  - JPA
-  - Hibernate
-  - gradle
+	- Spring 
+	- JAVA8
+	- Spring Boot 1.5.10
+	- JPA
+	- Hibernate
+	- Gradle
+		- Lombok [Core]
+		- Web [Web]
+		- JPA [SQL]
+		- H2 [SQL]
 
 - Frontend 
   - Jquery3 ????????
   - Bootstrap4 ????????
 	
 
+
 ## 1. 요구조건 및 제약사항
 #### *주어진 **주택금융 공급현황 분석 데이터**를 기반으로 주택금융 공급기관(은행) 지원금액에 대한 통계를 제공하는 API를 개발한다.*
 
 ## 1.1 요구조건
 ```
-- 데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API 개발
+* 데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API 개발
 
 - 주택금융 공급 금융기관(은행) 목록을 출력하는 API 개발
 
@@ -69,28 +75,27 @@
 - 머리행 한글 처리를 위해 EUC-KR로 Encoding 설정
 ```
 
-## 2.2 데이터베이스 연결 및 저장
+## 2.3 데이터베이스 연결 및 저장
 ```
-- __H2 DB__ 를 연결하기 위한 application.properties 설정
+- **H2 DB** 를 연결하기 위한 application.properties 설정
 	-DB 연결 설정 : url, username, password
 	-H2 접속 설정 : path
 	-Hibernate 설정 : update, create-drop
 ```
 
-## 2.3 Entity 생성
+## 2.4 Entity 생성
 ```
-- 읽어온 __년월별 금융기관 지원금액__에 대한 SupplyData 엔티티 생성
+- 읽어온 *년월별 금융기관 지원금액*에 대한 SupplyData 엔티티 생성
 	- ~~<u>id, year, month, molitFd, kbBank, wrBank, shBank, sitiBank, hnBank, nhBank, kebBank, etcBank</u>~~
-	- ~~<u>id, year, month, bank, amount</u>
+	- ~~<u>id, year, month, bank, amount</u>~~
 	- 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 <u>year, month, bank, amount</u>컬럼으로 저장한다.
 	
 - 제약사항에 해당하는 *금융기관*에 대한 InstituteDate 엔티티 생성
 	-<u>기관명, 기관코드</u> 컬럼
 ```
 
-## 2.4 controller / service / Repository 생성
+## 2.5 controller / service / Repository 생성
 ```
 
 
 ```
-

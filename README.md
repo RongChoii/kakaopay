@@ -1,6 +1,6 @@
 # 주택금융 서비스 API 개발
 
-#### 카카오페이 사전과제 : 주택금융 공급현황 분석 서비스
+### 카카오페이 사전과제 : 주택금융 공급현황 분석 서비스
 
 **개발환경**
 
@@ -41,7 +41,7 @@
 
 ## 1.2 제약사항
 
-- **ORM(Object Relational Mapping)**을 사용하여 엔티티 정의 및 레퍼지토리 개발
+- **ORM(Object Relational Mapping)** 을 사용하여 엔티티 정의 및 레퍼지토리 개발
 	- Java 의 경우 **JPA**
 	- 주택금융 공급기관(은행)은 독립 엔티티(기관명과 기관코드)로 디자인
 
@@ -92,7 +92,7 @@
 읽어온 *년월별 금융기관 지원금액*에 대한 SupplyData 엔티티 생성
 - ~~id, year, month, molitFd, kbBank, wrBank, shBank, sitiBank, hnBank, nhBank, kebBank, etcBank~~
 - ~~id, year, month, bank, amount~~
-- 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 ** year, month, bank, amount ** 컬럼으로 저장한다.
+- 객체 그대로의 JSON 형태로 return하기 위해, 고유 id 없이 **year, month, bank, amount** 컬럼으로 저장한다.
 
 제약사항에 해당하는 *금융기관*에 대한 InstituteDate 엔티티 생성
 - **기관명, 기관코드** 컬럼

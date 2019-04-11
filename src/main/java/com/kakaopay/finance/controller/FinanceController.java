@@ -6,10 +6,9 @@ import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.service.FinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/f")
@@ -32,7 +31,7 @@ public class FinanceController {
     /* 기본문제_(2) : 주택금융 공급 금융기관(은행) 목록을 출력하는 API를 개발하세요.  */
     @GetMapping("/bankList")
     @ResponseBody
-    public Object getBankList(@RequestParam Map<String, String> param, ModelMap model){
+    public Object getBankList(){
 //        return service.getBankList();
         return service.getBankList();
     }
@@ -40,7 +39,7 @@ public class FinanceController {
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 */
     @GetMapping("/sumPerBankPerYear")
     @ResponseBody
-    public SupplyListTotal getSumPerBankPerYear(@RequestParam Map<String, String> param, ModelMap model){
+    public SupplyListTotal getSumPerBankPerYear(){
 
         return service.getSumPerBankPerYear();
     }
@@ -48,7 +47,7 @@ public class FinanceController {
     /* 기본문제_(4) : 각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명  */
     @GetMapping("/maxPerData")
     @ResponseBody
-    public BestBank getMaxPerData(@RequestBody BestBank bestBank, ModelMap model){
+    public BestBank getMaxPerData(){
 
         return service.getMaxPerData();
     }
@@ -56,7 +55,7 @@ public class FinanceController {
     /* 기본문제_(5) : 전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액  */
     @GetMapping("/maxMinForKeb")
     @ResponseBody
-    public BankStatistics getMaxMinForKeb(@RequestParam Map<String, String> param, ModelMap model){
+    public BankStatistics getMaxMinForKeb(){
 
         return service.getMaxMinForKeb();
     }

@@ -1,22 +1,24 @@
 package com.kakaopay.finance.service;
 
-import com.kakaopay.finance.jpa.BestBankRepository;
-import com.kakaopay.finance.jpa.SupplyBankRepository;
-import com.kakaopay.finance.jpa.SupplyDataRepository;
-import com.kakaopay.finance.jpa.YearAmountRepository;
+import com.kakaopay.finance.jpa.*;
+import com.kakaopay.finance.model.basic1.EBank;
 import com.kakaopay.finance.model.basic1.SupplyBank;
 import com.kakaopay.finance.model.basic1.SupplyList;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.model.basic3.YearAmount;
+import com.kakaopay.finance.model.file.InstituteData;
 import com.kakaopay.finance.model.file.SupplyData;
 import com.kakaopay.finance.util.ConverterUtil;
 import com.kakaopay.finance.util.FileReaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class FinanceService {
@@ -33,19 +35,30 @@ public class FinanceService {
     @Autowired
     BestBankRepository bestBankRepository;
 
+    @Autowired
+    InstituteDataRepository instituteDataRepository;
+
     /* 기본문제 (1) 데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API 개발 --> 완료 */
     public String insertData(){
 
+        //은행기관 코드 DB에 저장
+        instituteDataRepository.deleteAll();
+        Arrays.stream(EBank.values()).forEach(e -> instituteDataRepository.save( new InstituteData(e.getBankName(), e.getBankCode())));
+
+        //CSV 읽어와서 DB에 저장
         List<String> fileReader = FileReaderUtil.getCsvfileInfo("C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv");
         fileReader = ConverterUtil.convertToBasicFormat(fileReader);
 
         supplyDataRepository.deleteAll();
+
+        EBank eBank;
 
         int year=0;
         int month=0;
         List<String> headRow = new ArrayList<>();
         for(int i=0; i<fileReader.size(); i++){
             if(i==0) {
+
                 headRow = Arrays.asList(fileReader.get(i).split(","));
                 continue;
             }

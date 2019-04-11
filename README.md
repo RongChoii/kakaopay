@@ -96,28 +96,21 @@
 ### 2.6 문제 해결 전략
 (1) **데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API**
 
-> .CSV파일의 한 row씩 읽을때 년, 월 레코드를 제외한 모든 column에서 save 실행하여 [YEAR, MONTH, BANK, AMOUNT] 테이블구조로 isnert
+> .CSV파일의 한 row씩 읽을때 년, 월 레코드를 제외한 모든 column에서 save 실행하여
+>
+> [YEAR, MONTH, BANK, AMOUNT] 테이블구조로 isnert
 
 (2) **주택금융 공급 금융기관(은행) 목록을 출력하는 API**
 > `SELECT BANK FROM SUPPLY_DATA;`
 
 (3) **년도별 각 금융기관의 지원금액 합계를 출력하는 API**
-
-```
-return 해야할 json 형태의 하위구조에 따라 객체 list에 for문을 이용해서 하위 객체 생성
-```
+> return 해야할 json 형태의 하위구조에 따라 객체 list에 for문을 이용해서 하위 객체 생성
 
 (4) **각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 출력하는 API**
-
-`
-SELECT SUM(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA GROUP BY YEAR, BANK;
-`
+> `SELECT SUM(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA GROUP BY YEAR, BANK;`
 
 (5) **전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API**
-
-`
-SELECT AVG(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA WHERE='외환은행' GROUP BY YEAR, BAK;
-`
+> `SELECT AVG(AMOUNT) AS AMOUNT, YEAR, BANK FROM SUPPLY_DATA WHERE='외환은행' GROUP BY YEAR, BAK;`
 
 ## 3. 개발
 

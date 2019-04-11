@@ -20,7 +20,13 @@ public class Approximation {
     private int year;
     private int month;
     private int amount;
+    private int year_count;
 
-
+    public Approximation(String bank, int year, int month, int amount) {
+        this.bank = bank;
+        this.year = year;
+        this.month = month;
+        this.amount = amount;
+    }
 
 }

@@ -4,11 +4,13 @@ import com.kakaopay.finance.model.basic1.Bank;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
+import com.kakaopay.finance.model.option.Approximation;
 import com.kakaopay.finance.service.FinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -66,9 +68,8 @@ public class FinanceController {
     /* 추가문제 : 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 */
     @GetMapping("/estimateValue")
     @ResponseBody
-    public BankStatistics getEstimationValue(){
-
-//        return service.getEstimationValue();
-        return null;
+    public Approximation getEstimationValue(
+            @RequestParam("bank") String bank, @RequestParam("month") int month){
+        return service.getApproximateAmount(bank, month);
     }
 }

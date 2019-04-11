@@ -7,15 +7,13 @@ import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.model.basic3.YearAmount;
 import com.kakaopay.finance.model.file.InstituteData;
 import com.kakaopay.finance.model.file.SupplyData;
+import com.kakaopay.finance.model.option.Approximation;
 import com.kakaopay.finance.util.ConverterUtil;
 import com.kakaopay.finance.util.FileReaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FinanceService {
@@ -37,6 +35,9 @@ public class FinanceService {
 
     @Autowired
     InstituteDataRepository instituteDataRepository;
+
+    @Autowired
+    ApproximationRepository approximationRepository;
 
     /* 기본문제 (1) 데이터 파일에서 각 레코드를 데이터베이스에 저장하는 API 개발 --> 완료 */
     public String insertData(){
@@ -94,11 +95,9 @@ public class FinanceService {
 
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 --> 완료 */
     public SupplyListTotal getSumPerBankPerYear(){
-        List<YearAmount> yearList = yearAmountRepository.selectYearTotal();
-
         return new SupplyListTotal(1, "주택금융 공급현황",
                 new ArrayList<SupplyList>(){{
-                    yearList.forEach(year -> {
+                    yearAmountRepository.selectYearTotal().forEach(year -> {
                         add(new SupplyList(
                                 String.valueOf(year.getYear())+"년",
                                 year.getAmount(),
@@ -153,6 +152,14 @@ public class FinanceService {
         );
     }
 
-    /* 추가문제 : 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 ????????????????? */
+    /* 추가문제 : 특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측 */
+    public Approximation getApproximateAmount(String bank, int month){
+        final Approximation approximation =
+                approximationRepository.selectApproximationAmountByBankAndMonth(bank, month);
 
+        // 표준편차
+        final boolean isPlus = new Random(1).nextBoolean();
+        final int rand = new Random(5).nextInt() * (isPlus ? 1 : -1);
+        return new Approximation(EBank.valueOf(bank).getBankCode(), 2018, month, approximation.getAmount() / approximation.getYear_count() + rand);
+    }
 }

@@ -179,7 +179,7 @@ spring.datasource.url=jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUT
 
 3. **메인화면 접속 (localhost)**
 
-4. **[데이터 저장] 버튼으로 csv파일을 DB에 저장
+4. **[데이터 저장] 버튼으로 csv파일을 DB에 저장**
 
 5. **H2 Web Console 접속**
 > url : /h2console

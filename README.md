@@ -147,6 +147,7 @@
 
 ### 3.1 모든 API의 기본 테이블
 - SupplyData
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | integer |
@@ -156,6 +157,7 @@
 
 ### 3.2 금융기관 : InstituteData
 - InstituteData
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | instituteName | String |
@@ -171,6 +173,7 @@
 > Method : GET
 
 - 저장 Table : SupplyData
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | integer |
@@ -185,6 +188,7 @@
 
 - JSON 리턴 객체 : List<Bank>
 - Bank
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | bank | String |
@@ -196,6 +200,7 @@
 
 - JSON 리턴 객체 : SupplyListTotal
 - SupplyListTotal
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | id | integer |
@@ -203,6 +208,7 @@
 | list | List<SupplyList> |
 
 - SupplyList
+
 | 컬럼  | Type   |
 | :---- | :----- |
 | year | String |

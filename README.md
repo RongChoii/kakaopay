@@ -49,7 +49,7 @@
 - README.md 작성(개발 프레임워크, 문제해결 전략, 빌드 및 실행방법)
 
 ## 2. 분석 및 설계 (문제해결 전략)
-#### _원하는 개발환경을 위한 프로젝트 생성 및 설정을 하고, 제공받은 .csv 파일을 읽어와서 생성한 데이터베이스에 접속, model(Entity)의 table에 저장하고, controller-service-query 순서로 호출하여 객체 형태로 데이터를 return 시킨다_
+#### _원하는 개발환경을 위한 프로젝트 생성 및 설정 하고, 제공받은 .csv 파일을 읽어와서 생성한 데이터베이스에 접속, model(Entity)의 table에 저장하고, controller-service-repository호출하여 객체 형태로 데이터를 return 시킨다_
 
 ## 2.1 프로젝트 생성
 *Spring Initializr*로 원하는 개발환경을 설정하여 프로젝트를 생성

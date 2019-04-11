@@ -33,36 +33,32 @@
 		}
 	};
 
-<!--	var getlength2 = function(obj, size){-->
-<!--		console.log("size1 = " + Object.keys(obj).length);-->
-
-<!--		var key=null;-->
-<!--		for(key in obj){-->
-<!--			console.log("size2 = " + Object.keys(key).length);-->
-<!--			if(key typeof ({}) ){-->
-<!--				console.log("Object");-->
-<!--			}-->
-
-<!--			if(obj.hasOwnProperty(key)){-->
-<!--				console.log("-키 있음 : " + key);-->
-
-<!--				var key2 = null;-->
-<!--				for(key2 in key){-->
-<!--					console.log("size3 = " + Object.keys(key2).length);-->
-
-<!--					if(key.hasOwnProperty(key2)){-->
-<!--						console.log("-키 있음 : " + key2);-->
-<!--					}else{-->
-<!--						console.log("-키 없음");-->
-<!--					}-->
-<!--				}-->
-
-<!--			}else {-->
-<!--				console.log("no key");-->
-<!--			}-->
-<!--		}-->
-<!--		return size;-->
-<!--	}-->
+	var getlength2 = function(obj, size){
+		console.log("size1 = " + Object.keys(obj).length);
+		var key=null;
+		for(key in obj){
+			console.log("size2 = " + Object.keys(key).length);
+			console.log("key :: " + key);
+			if(obj[key] instanceof Array ){
+				console.log("Object");
+			}
+			if(obj.hasOwnProperty(key)){
+				console.log("-키 있음 : " + key);
+				var key2 = null;
+				for(key2 in key){
+					console.log("size3 = " + Object.keys(key2).length);
+					if(key.hasOwnProperty(key2)){
+						console.log("-키 있음 : " + key2);
+					}else{
+						console.log("-키 없음");
+					}
+				}
+			}else {
+				console.log("no key");
+			}
+		}
+		return size;
+}
 
 
 
@@ -88,6 +84,7 @@
 				success : function(data) {
 					console.log(data);
 					$('#sumPerBankPerYearValue').val(JSON.stringify(data, null, '\t'));
+					var total = getlength2(data, 0);
 				},
 				error : function(e) {
 					console.log(e.responseText);
@@ -124,6 +121,8 @@
 			});
 		});
 
+		$("#bankListValue").set9
+
 	});
 </script>
 <body>
@@ -138,12 +137,12 @@
 		</h3>
 		<nav>
 			<ul class="nav nav-justified">
-				<li class="active"><a href="#">Home</a></li>
+				<!--<li class="active"><a href="#">Home</a></li>
 				<li><a href="#">Projects</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Downloads</a></li>
 				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a href="#">Contact</a></li>-->
 			</ul>
 		</nav>
 	</div>
@@ -153,7 +152,7 @@
 		<h1>주택금융 서비스 API</h1>
 		<p class="lead">본 서비스는 국내 주택금융 신용보증기관으로부터 제공받은 년도별 각 금융기관(은행)에서 신용보증한 금액에 대한 데이터를 기반으로</p>
 		<p class="lead">주택금융 공급기관(은행)의 지원금액 관련 통계 데이터를 JSON 형태로 반환해주는 API입니다.</p>
-		<p><a class="btn btn-lg btn-success" href="#" role="button">API 문서 보기</a></p>
+<!--		<p><a class="btn btn-lg btn-success" href="#" role="button">API 문서 보기</a></p>-->
 	</div>
 
 	<!-- 기본문제_(2) : /f/bankList -->
@@ -204,151 +203,15 @@
 	</div>
 
 	<!-- 추가문제 : /f/estimateValue -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h2>추가문제 !</h2>
-			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-<!--			<p><a class="btn btn-primary" onClick="pageSubmitFn('estimateValue')" role="button">Call API</a></p>-->
-			<p><a class="btn btn-primary" id="callEstimateValue" role="button">Call API_ajax</a></p>
-			<textarea class="col-lg-12" rows="10" id="estimateValue"></textarea>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-lg-12">
-
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>Header</th>
-						<th>Header</th>
-						<th>Header</th>
-						<th>Header</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1,001</td>
-						<td>Lorem</td>
-						<td>ipsum</td>
-						<td>dolor</td>
-						<td>sit</td>
-					</tr>
-					<tr>
-						<td>1,002</td>
-						<td>amet</td>
-						<td>consectetur</td>
-						<td>adipiscing</td>
-						<td>elit</td>
-					</tr>
-					<tr>
-						<td>1,003</td>
-						<td>Integer</td>
-						<td>nec</td>
-						<td>odio</td>
-						<td>Praesent</td>
-					</tr>
-					<tr>
-						<td>1,003</td>
-						<td>libero</td>
-						<td>Sed</td>
-						<td>cursus</td>
-						<td>ante</td>
-					</tr>
-					<tr>
-						<td>1,004</td>
-						<td>dapibus</td>
-						<td>diam</td>
-						<td>Sed</td>
-						<td>nisi</td>
-					</tr>
-					<tr>
-						<td>1,005</td>
-						<td>Nulla</td>
-						<td>quis</td>
-						<td>sem</td>
-						<td>at</td>
-					</tr>
-					<tr>
-						<td>1,006</td>
-						<td>nibh</td>
-						<td>elementum</td>
-						<td>imperdiet</td>
-						<td>Duis</td>
-					</tr>
-					<tr>
-						<td>1,007</td>
-						<td>sagittis</td>
-						<td>ipsum</td>
-						<td>Praesent</td>
-						<td>mauris</td>
-					</tr>
-					<tr>
-						<td>1,008</td>
-						<td>Fusce</td>
-						<td>nec</td>
-						<td>tellus</td>
-						<td>sed</td>
-					</tr>
-					<tr>
-						<td>1,009</td>
-						<td>augue</td>
-						<td>semper</td>
-						<td>porta</td>
-						<td>Mauris</td>
-					</tr>
-					<tr>
-						<td>1,010</td>
-						<td>massa</td>
-						<td>Vestibulum</td>
-						<td>lacinia</td>
-						<td>arcu</td>
-					</tr>
-					<tr>
-						<td>1,011</td>
-						<td>eget</td>
-						<td>nulla</td>
-						<td>Class</td>
-						<td>aptent</td>
-					</tr>
-					<tr>
-						<td>1,012</td>
-						<td>taciti</td>
-						<td>sociosqu</td>
-						<td>ad</td>
-						<td>litora</td>
-					</tr>
-					<tr>
-						<td>1,013</td>
-						<td>torquent</td>
-						<td>per</td>
-						<td>conubia</td>
-						<td>nostra</td>
-					</tr>
-					<tr>
-						<td>1,014</td>
-						<td>per</td>
-						<td>inceptos</td>
-						<td>himenaeos</td>
-						<td>Curabitur</td>
-					</tr>
-					<tr>
-						<td>1,015</td>
-						<td>sodales</td>
-						<td>ligula</td>
-						<td>in</td>
-						<td>libero</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-
-		</div>
-
-	</div>
-
+<!--	<div class="row">-->
+<!--		<div class="col-lg-12">-->
+<!--			<h2>추가문제 !</h2>-->
+<!--			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>-->
+<!--&lt;!&ndash;			<p><a class="btn btn-primary" onClick="pageSubmitFn('estimateValue')" role="button">Call API</a></p>&ndash;&gt;-->
+<!--			<p><a class="btn btn-primary" id="callEstimateValue" role="button">Call API_ajax</a></p>-->
+<!--			<textarea class="col-lg-12" rows="10" id="estimateValue"></textarea>-->
+<!--		</div>-->
+<!--	</div>-->
 </div>
 </body>
 </html>

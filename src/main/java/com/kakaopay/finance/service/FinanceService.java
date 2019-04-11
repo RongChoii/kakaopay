@@ -1,10 +1,7 @@
 package com.kakaopay.finance.service;
 
 import com.kakaopay.finance.jpa.*;
-import com.kakaopay.finance.model.basic1.EBank;
-import com.kakaopay.finance.model.basic1.SupplyBank;
-import com.kakaopay.finance.model.basic1.SupplyList;
-import com.kakaopay.finance.model.basic1.SupplyListTotal;
+import com.kakaopay.finance.model.basic1.*;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
 import com.kakaopay.finance.model.basic3.YearAmount;
@@ -25,6 +22,9 @@ public class FinanceService {
 
     @Autowired
     SupplyDataRepository supplyDataRepository;
+
+    @Autowired
+    BankRepository bankRepository;
 
     @Autowired
     SupplyBankRepository supplyBankRepository;
@@ -88,8 +88,8 @@ public class FinanceService {
     }
 
     /* 기본문제_(2) : 주택금융 공급 금융기관(은행) 목록을 출력하는 API를 개발하세요.  --> 완료 */
-    public Object getBankList(){
-        return supplyDataRepository.findBankList();
+    public List<Bank> getBankList(){
+        return bankRepository.findBankList();
     }
 
     /* 기본문제_(3) : 년도별 각 금융기관의 지원금액 합계 --> 완료 */
@@ -110,8 +110,6 @@ public class FinanceService {
                                         i++;
                                     }
                                 }}
-//                                supplyBankRepository.selectAmountPerBankByYear(year.getYear())
-//                                detailAmount.put(EBank.valueOf(supplyBankRepository.selectAmountPerBankByYear(year.getYear()).get(0).getBank()).getBankName(), 1234141414)
                         ));
                     });
                 }}

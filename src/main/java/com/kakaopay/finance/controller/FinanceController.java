@@ -1,5 +1,6 @@
 package com.kakaopay.finance.controller;
 
+import com.kakaopay.finance.model.basic1.Bank;
 import com.kakaopay.finance.model.basic1.SupplyListTotal;
 import com.kakaopay.finance.model.basic2.BestBank;
 import com.kakaopay.finance.model.basic3.BankStatistics;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/f")
@@ -31,7 +34,7 @@ public class FinanceController {
     /* 기본문제_(2) : 주택금융 공급 금융기관(은행) 목록을 출력하는 API를 개발하세요.  */
     @GetMapping("/bankList")
     @ResponseBody
-    public Object getBankList(){
+    public List<Bank> getBankList(){
 //        return service.getBankList();
         return service.getBankList();
     }

@@ -33,36 +33,24 @@
 		}
 	};
 
-	var getlength2 = function(obj, size){
-		console.log("size1 = " + Object.keys(obj).length);
-		var key=null;
-		for(key in obj){
-			console.log("size2 = " + Object.keys(key).length);
-			console.log("key :: " + key);
-			if(obj[key] instanceof Array ){
-				console.log("Object");
-			}
-			if(obj.hasOwnProperty(key)){
-				console.log("-키 있음 : " + key);
-				var key2 = null;
-				for(key2 in key){
-					console.log("size3 = " + Object.keys(key2).length);
-					if(key.hasOwnProperty(key2)){
-						console.log("-키 있음 : " + key2);
-					}else{
-						console.log("-키 없음");
-					}
-				}
-			}else {
-				console.log("no key");
-			}
-		}
-		return size;
-}
-
-
-
 	$(document).ready(function() {
+
+		$("#callInsert").click(function(){
+			$.ajax({
+				url : "/f/insert",
+				dataType : "text",
+				success : function(data) {
+					console.log(data);
+					$("#insertSuccess").style.visibility="visible";
+<!--					document.all.cattery.style.visibility="visible";-->
+
+				},
+				error : function(e) {
+					console.log(e.responseText);
+				}
+			});
+		});
+
 		$("#callBankList").click(function() {
 			$.ajax({
 				url : "/f/bankList",
@@ -138,7 +126,6 @@
 				}
 			});
 		});
-
 	});
 </script>
 <body>
@@ -168,14 +155,14 @@
 		<h1>주택금융 서비스 API</h1>
 		<p class="lead">본 서비스는 국내 주택금융 신용보증기관으로부터 제공받은 년도별 각 금융기관(은행)에서 신용보증한 금액에 대한 데이터를 기반으로</p>
 		<p class="lead">주택금융 공급기관(은행)의 지원금액 관련 통계 데이터를 JSON 형태로 반환해주는 API입니다.</p>
-<!--		<p><a class="btn btn-lg btn-success" href="#" role="button">API 문서 보기</a></p>-->
+		<p><a class="btn btn-lg btn-success" id="callInsert" role="button">데이터저장</a></p>
+		<div id="insertSuccess" style="visibility:hidden;">success</div>
 	</div>
 
 	<!-- 기본문제_(2) : /f/bankList -->
 	<div class="row">
 		<div class="col-lg-12 col-sm-6" >
 			<h2>주택금융 공급 금융기관(은행) 목록을 출력하는 API</h2>
-			<p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
 			<p><a class="btn btn-primary" id="callBankList" role="button">Call API</a></p>
 			<textarea class="col-lg-12" rows="10" id="bankListValue"></textarea>
 		</div>
@@ -212,21 +199,21 @@
 	</div>
 
 	<!-- 추가문제 : /f/approximateAmount -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h2>특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측하는 API 개발 </h2>
-			<p>단, 예측 알고리즘을 무엇을 써야하는지에 대한 제약은 없지만, 가장 근사치에 가까울 수록 높은 점수 부여</p>
-			<div class="col-lg-4">
-				<input type="text" id="approximateAmountBank" class="form-control" placeholder="은행명">
-			</div>
-			<div class="col-lg-4">
-				<input type="text" id="approximateAmountMonth" class="form-control" placeholder="월수">
-			</div>
+<!--	<div class="row">-->
+<!--		<div class="col-lg-12">-->
+<!--			<h2>특정 은행의 특정 달에 대해서 2018년도 해당 달에 금융지원 금액을 예측하는 API 개발 </h2>-->
+<!--			<p>단, 예측 알고리즘을 무엇을 써야하는지에 대한 제약은 없지만, 가장 근사치에 가까울 수록 높은 점수 부여</p>-->
+<!--			<div class="col-lg-4">-->
+<!--				<input type="text" id="approximateAmountBank" class="form-control" placeholder="은행명">-->
+<!--			</div>-->
+<!--			<div class="col-lg-4">-->
+<!--				<input type="text" id="approximateAmountMonth" class="form-control" placeholder="월수">-->
+<!--			</div>-->
 
-			<p><a class="btn btn-primary" id="approximateAmount" role="button">Call API</a></p>
-			<textarea class="col-lg-12" rows="10" id="approximateAmountValue"></textarea>
-		</div>
-	</div>
+<!--			<p><a class="btn btn-primary" id="approximateAmount" role="button">Call API</a></p>-->
+<!--			<textarea class="col-lg-12" rows="10" id="approximateAmountValue"></textarea>-->
+<!--		</div>-->
+<!--	</div>-->
 </div>
 
 <div class="footer" style="height: 200px">

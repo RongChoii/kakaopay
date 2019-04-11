@@ -54,4 +54,5 @@ public class FinanceApplicationTests {
 		financeService.getMaxMinForKeb();
 	}
 
+
 }

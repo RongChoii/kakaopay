@@ -21,5 +21,4 @@ public class SupplyList {
     private int total_amount;
     private Map<String, Object> detail_amount;
 
-
 }

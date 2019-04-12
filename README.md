@@ -165,30 +165,30 @@
 ## 4. API 정보 및 실행 방법
 
 ### 4.0 실행 방법
-1. **com.kakaopay.finance.service의 FinanceSevice의 49 line의 CSV 경로 수정**
+(1) **com.kakaopay.finance.service의 FinanceSevice의 49 line의 CSV 경로 수정**
 
 `
 String csvPath = "C:/Users/rong/Desktop/카카오페이/2019경력공채_개발_사전과제3_주택금융신용보증_금융기관별_공급현황.csv";
 `
 
-2. **application.properties 의 2 line 의 DB 경로 수정**
+(2) **application.properties 의 2 line 의 DB 경로 수정**
 
 `
 spring.datasource.url=jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUTO_SERVER=TRUE;
 `
 
-3. **메인화면 접속 (localhost)**
+(3) **메인화면 접속 (localhost)**
 
-4. **[데이터 저장] 버튼으로 csv파일을 DB에 저장**
+(4) **[데이터 저장] 버튼으로 csv파일을 DB에 저장**
 
-5. **H2 Web Console 접속**
+(5) **H2 Web Console 접속**
 > url : /h2console
 >
 > name : kakao (application.properties와 동일)
 >
 > password : 0000 (application.properties와 동일)
 
-6. **메인화면에서 각 API 호출 버튼 클릭하여 각 API에 따른 통계 데이터(JSON 형태) 확인**
+(6) **메인화면에서 각 API 호출 버튼 클릭하여 각 API에 따른 통계 데이터(JSON 형태) 확인**
 
 
 

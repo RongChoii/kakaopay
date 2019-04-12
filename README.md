@@ -188,7 +188,7 @@ spring.datasource.url=jdbc:h2:file:C:/Users/rong/eclipse-workspace/financeDB;AUT
 >
 > password : 0000 (application.properties와 동일)
 
-6. **각 API 호출 버튼 클릭하여 각 API에 따른 통계 데이터(JSON 형태) 확인**
+6. **메인화면에서 각 API 호출 버튼 클릭하여 각 API에 따른 통계 데이터(JSON 형태) 확인**
 
 
 
